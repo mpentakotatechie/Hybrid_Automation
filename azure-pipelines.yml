@@ -16,3 +16,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'java -jar Execute.jar'
+- task: AzureFileCopy@4
+  inputs:
+    SourcePath: 'Reports/*'
+    azureSubscription: 'Free Trial(d085f3e8-2707-44ef-bf72-e888483ea9d8)'
+    Destination: 'AzureBlob'
+    storage: 'hybridautomationreports'
+    ContainerName: 'AutomationReports'
