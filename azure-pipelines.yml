@@ -1,0 +1,25 @@
+# Maven
+
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-2019
+
+steps:
+  
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'java -jar Execute.jar'
+- task: AzureFileCopy@4
+  inputs:
+    SourcePath: 'Reports/*'
+    azureSubscription: 'Free Trial(d085f3e8-2707-44ef-bf72-e888483ea9d8)'
+    Destination: 'AzureBlob'
+    storage: 'hybridautomationreports'
+    ContainerName: 'AutomationReports'
